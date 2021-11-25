@@ -12,11 +12,29 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.togglebutton import ToggleButton
 
 
-ciphers = [f'test{i}' for i in range(20)]
+def test(mode, message):
+    return f'Mode: {mode}, message: {message}'
+
+ciphers = {'test':test, 'test2':test, 'test3':test, 'test4':test, }
 
 
 class CryptographyApp(App):
 
+    def getCipher(self, mode):
+        mode_short = mode.text[0]
+        if not self.message.text: 
+            self.result.text = ":: Message is not found ::"; return
+        for i in range(len(ciphers)):
+            if self.toggle[i].state == 'down':
+                self.result.text = ciphers[self.toggle[i].text](mode_short,  self.message.text)
+                break
+
+
+    def clear(self, mode):
+        self.result.font_size = 14
+        self.key.text = ""
+        self.message.text = ""
+        self.result.text = ""
 
     def build(self):
         Window.size = (700, 500)
@@ -31,11 +49,13 @@ class CryptographyApp(App):
 
         self.toggle = ['0' for _ in range(len(ciphers))]
         
-        for i in range(len(ciphers)):
-            self.toggle[i] = ToggleButton(
-                text=ciphers[i], group='cipher',
+        j = 0
+        for i in ciphers.keys():
+            self.toggle[j] = ToggleButton(
+                text=i, group='cipher',
                 height=30, state='normal', size_hint_y=None)
-            LeftGrid.add_widget(self.toggle[i])
+            LeftGrid.add_widget(self.toggle[j])
+            j += 1
 
         left.add_widget(LeftGrid)
         root.add_widget(left)
@@ -46,8 +66,8 @@ class CryptographyApp(App):
         topBox.add_widget(self.key)
 
         rightTopBox = BoxLayout(orientation='vertical', size_hint=[.5,1])
-        rightTopBox.add_widget(Button(text='Encrypt'))
-        rightTopBox.add_widget(Button(text='Decrypt'))
+        rightTopBox.add_widget(Button(text='Encrypt', on_press = self.getCipher))
+        rightTopBox.add_widget(Button(text='Decrypt', on_press = self.getCipher))
 
 
         topBox.add_widget(rightTopBox)
@@ -60,8 +80,7 @@ class CryptographyApp(App):
         right.add_widget(self.result)
 
         downBox = BoxLayout(orientation='horizontal', size_hint=[1,.15])
-        downBox.add_widget(Button(text='Code'))
-        downBox.add_widget(Button(text='Clear'))
+        downBox.add_widget(Button(text='Clear', on_press = self.clear))
 
         right.add_widget(downBox)
 

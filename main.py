@@ -11,14 +11,14 @@ from kivy.uix.codeinput import CodeInput
 from kivy.uix.textinput import TextInput
 from kivy.uix.togglebutton import ToggleButton
 
-from ciphers import сaesar_сiplet, vigenere_cipher
+from ciphers import сaesar_сiplet, vigenere_cipher, homophonic_substitution_cipher
 
 
 
 def test(mode, message, key):
     return f'Mode: {mode}, message: {message}, key: {key}'
 
-ciphers = {'Caesar Ciplet':сaesar_сiplet, 'Vigenere Cipher':vigenere_cipher, 'test3':test, 'test4':test, }
+ciphers = {'Caesar Ciplet':сaesar_сiplet, 'Vigenere Cipher':vigenere_cipher, 'Homophonic Cipher':homophonic_substitution_cipher, 'test3':test, 'test4':test, }
 
 
 class CryptographyApp(App):

@@ -11,14 +11,14 @@ from kivy.uix.codeinput import CodeInput
 from kivy.uix.textinput import TextInput
 from kivy.uix.togglebutton import ToggleButton
 
-from ciphers import сaesar_сiplet, vigenere_cipher, homophonic_substitution_cipher
+from ciphers import сaesar_сiplet, vigenere_cipher, homophonic_substitution_cipher, substitution_cipher
 
 
 
 def test(mode, message, key):
     return f'Mode: {mode}, message: {message}, key: {key}'
 
-ciphers = {'Caesar Ciplet':сaesar_сiplet, 'Vigenere Cipher':vigenere_cipher, 'Homophonic Cipher':homophonic_substitution_cipher, 'test3':test, 'test4':test, }
+ciphers = {'Caesar Ciplet':сaesar_сiplet, 'Vigenere Cipher':vigenere_cipher, 'Homophonic Cipher':homophonic_substitution_cipher, 'Substitution Cipher':substitution_cipher,}
 
 
 class CryptographyApp(App):
@@ -27,7 +27,7 @@ class CryptographyApp(App):
         mode_short = mode.text[0]
         if not self.message.text: 
             self.result.text = ":: Message is not found ::"; return
-        if not self.key.text: 
+        if not self.key.text:
             self.result.text = ":: Key is not found ::"; return
         for i in range(len(ciphers)):
             if self.toggle[i].state == 'down':

@@ -103,3 +103,31 @@ def homophonic_substitution_cipher(mode, message, key):
 					final += key
 
 	return final
+
+
+def substitution_cipher(mode, message, keys):
+    '''
+    message - the string to encode or decore\n
+    keys - Dictionary with character ratios. When encoding: sign - key. When decoded: key - sign.\n
+    \n
+    The function encodes or decodes the message.\n
+    Returns a string.\n    
+	'''
+    symbolsAlpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] 
+    symbolsCrypt = ['!','@','#','$','%','^','&','*','(',')','-','=', '+','?',':',';','<','>','/','[',']','{','}','|','.',',','~'] 
+
+
+    if mode == 'E':
+        keys = dict(zip(symbolsAlpha,symbolsCrypt))
+    elif mode == 'D':
+        keys = dict(zip(symbolsCrypt, symbolsAlpha))
+		
+    modified_string = ""
+	
+    for i in message.upper():
+        if i in keys:
+            modified_string += keys[i]
+        else:
+            modified_string += i
+			
+    return modified_string

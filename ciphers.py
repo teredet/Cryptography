@@ -1,6 +1,6 @@
 from random import choice
 
-def сaesar_сiplet(menu, message, key):
+def caesar_ciplet(menu, message, key):
     '''
     menu - 'E' if you want to encrypt and 'D' if you want to decrypt\n
     message - the string to encode or decore\n

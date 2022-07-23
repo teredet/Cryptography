@@ -1,4 +1,3 @@
-from io import TextIOWrapper
 from kivy.app import App
 from kivy.core.window import Window
 
@@ -11,14 +10,15 @@ from kivy.uix.codeinput import CodeInput
 from kivy.uix.textinput import TextInput
 from kivy.uix.togglebutton import ToggleButton
 
-from ciphers import сaesar_сiplet, vigenere_cipher, homophonic_substitution_cipher, substitution_cipher
+from ciphers import caesar_ciplet, vigenere_cipher, homophonic_substitution_cipher, substitution_cipher
 
 
-
-def test(mode, message, key):
-    return f'Mode: {mode}, message: {message}, key: {key}'
-
-ciphers = {'Caesar Ciplet':сaesar_сiplet, 'Vigenere Cipher':vigenere_cipher, 'Homophonic Cipher':homophonic_substitution_cipher, 'Substitution Cipher':substitution_cipher,}
+ciphers = {
+    'Caesar Ciplet':caesar_ciplet,
+    'Vigenere Cipher':vigenere_cipher,
+    'Homophonic Cipher':homophonic_substitution_cipher,
+    'Substitution Cipher':substitution_cipher
+}
 
 
 class CryptographyApp(App):
